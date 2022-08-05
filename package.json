@@ -18,5 +18,7 @@
     "start": "koavc start"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+  }
 }
