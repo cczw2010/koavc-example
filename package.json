@@ -1,7 +1,9 @@
 {
   "name": "demo",
   "version": "1.0.0",
-  "description": "",
+  "description": "An example for koavc",
+  "type": "module",
+  "author": "awen",
   "dependencies": {
     "axios": "^0.27.2",
     "formidable": "^2.0.1",
@@ -11,13 +13,11 @@
     "level": "^8.0.0",
     "mkdirp": "^1.0.4"
   },
-  "type": "module",
   "scripts": {
     "build": "koavc build",
     "dev": "koavc dev",
     "start": "koavc start"
   },
-  "author": "",
   "license": "ISC",
   "devDependencies": {
   }
