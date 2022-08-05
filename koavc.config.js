@@ -8,6 +8,7 @@ export default {
     level:4,          // consola的level
     console:true,     // 开启不开启
   },
+  alias:{},
   // ===如果配置了https，将以https方式提供服务
   // https:{
   //   key: fs.readFileSync('ssl/xxxxyun.com.key'),
