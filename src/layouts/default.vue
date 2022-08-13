@@ -8,7 +8,9 @@
   <v-app class="app-layout">
     <v-app-bar app dense
       color="deep-purple accent-4"  >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon>
+        <v-img height="48" width="48" src="/assets/image/dog.jpg"></v-img>
+      </v-app-bar-nav-icon>
       <v-toolbar-title>{{title}}</v-toolbar-title>
     </v-app-bar>
     <v-main>

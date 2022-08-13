@@ -10,7 +10,7 @@
     "jsonwebtoken": "^8.5.1",
     "koa-body": "^5.0.0",
     "koa-session": "^6.2.0",
-    "koavc": "^1.1.0",
+    "koavc": "file:../koavc",
     "level": "^8.0.0",
     "mkdirp": "^1.0.4"
   },

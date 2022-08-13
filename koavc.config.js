@@ -19,17 +19,18 @@ export default {
     src:'pages',      //默认模板地址，相对于根目录
     engine:'vue'      //渲染引擎 default | lodash | vue 可自行拓展
   },
+  statics:[["/assets",'./assets']],
   middlewares:[koaBody()],
   // ============================================================= 编译相关
   vuesfcbuilder:{
     // sfc源文件后缀
     source_ext:'vue',
     // page源码目录
-    source_page:"pages",
+    source_page:"src/pages",
     // layout源码目录
-    source_layout: "layouts",
+    source_layout: "src/layouts",
     // 自定义component源码目录
-    source_component: "components",
+    source_component: "src/components",
     // 需要参与编译渲染的第三方的module配置
     buildModules:{
       'vuetify':{
