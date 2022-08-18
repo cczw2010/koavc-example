@@ -5,7 +5,7 @@
 </style>
 <template>
   <v-row justify="center">
-    <v-date-picker v-model="dates"  multiple ></v-date-picker>
+    <!-- <v-date-picker v-model="dates"  multiple ></v-date-picker> -->
     <ComponentA title="conter"></ComponentA>
   </v-row>
 </template>
