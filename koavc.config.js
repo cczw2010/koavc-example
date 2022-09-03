@@ -15,6 +15,9 @@ export default {
   //   cert: fs.readFileSync('ssl/xxxxyun.com.pem'),
   // },
   router:{
+    option:{
+      // exclusive:true,
+    },
     middlewares:['~/middlewares/test.js']
   },
   // ===view渲染配置  

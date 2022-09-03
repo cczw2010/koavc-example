@@ -2,12 +2,14 @@ caches/
 uploads/
 components.d.ts
 
+.koavc/
+
 logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
+pnpm-lock.yaml
 # Dependency directories
 node_modules/
 package-lock.json
