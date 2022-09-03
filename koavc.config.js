@@ -14,6 +14,9 @@ export default {
   //   key: fs.readFileSync('ssl/xxxxyun.com.key'),
   //   cert: fs.readFileSync('ssl/xxxxyun.com.pem'),
   // },
+  router:{
+    middlewares:['~/middlewares/test.js']
+  },
   // ===view渲染配置  
   view:{
     src:'src',        //默认模板地址，相对于根目录
