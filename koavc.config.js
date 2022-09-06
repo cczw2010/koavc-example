@@ -1,5 +1,6 @@
 import koaBody from "koa-body"
 
+
 // 默认参数，路径相对于项目根目录
 export default {
   port:3000,
@@ -18,7 +19,9 @@ export default {
     option:{
       // exclusive:true,
     },
-    middlewares:['~/middlewares/test.js']
+    middlewares:[
+      ['~/middlewares/auth.js',{secret:'yyds',auth:false,debug:true}],
+    ]
   },
   // ===view渲染配置  
   view:{
