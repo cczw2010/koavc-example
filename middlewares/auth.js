@@ -5,20 +5,30 @@ const defOption = {
                   secret:Date.now(),
                   key:'authtoken',
                   auth:true,
+                  refresh:false, //是否自动刷新token
                   cookie:true,
                   expiresIn:60*60*24,
                   message:'Authentication Error',
                   redirect: false       
                 }
 
-
+/**
+ * 生成token， 如果开启了cookie 会自动设置, 删除只需传入data 为空即可
+ *
+ * @param {*} ctx
+ * @param {*} data
+ * @param {*} option
+ * @returns string
+ */
 function setToken(ctx,data,option){
-  const token = data?jwt.sign({d:data}, option.secret, { expiresIn:option.expiresIn }):''
+  const token = data?jwt.sign({data}, option.secret, { expiresIn:option.expiresIn }):''
+  const maxAge = data?option.expiresIn*1000:0
   if(option.cookie){
     ctx.cookies.set(option.key,token,{
       httpOnly:true,
       path:'/',
-      maxAge:option.expiresIn*1000,   //ms
+      signed:false,
+      maxAge,   //ms
       // 一个 Date 对象, 表示 cookie 的到期日期 (默认情况下在会话结束时过期).如果设置了maxAge，expires将失效
       // expires: 
       overwrite: true 
@@ -27,16 +37,25 @@ function setToken(ctx,data,option){
   return token
 }
 
+// 获取用户数据
+function getUserInToken(ctx,userKey){
+  const data = ctx.state[userKey]
+  return data?.data
+}
 /**
- * jwt auth 校验中间件，controller 中注入[auth]属性，可以自定义是否需要校验auth
- * 校验顺序： post data -> cookie -> header
- * 如果koa-body没有在本中间件之前引入, post的校验token key将失效，
+ * jwt auth 校验中间件
+ *  ctx.auth.user      //设置user数据会自动更新token，cookie之外的校验方式需要自行更新token
+ *  ctx.auth.token
+ * 1 controller 中注入[auth]属性，可以自定义是否需要校验auth
+ * 2 如果koa-body没有在本中间件之前引入, post的校验token key将失效，
+ * 3 校验顺序： post data -> cookie -> header
  * @export
  * @param {*} option  
  *              {
  *                 key:'authtoken',             //校验的post中或者cookie中的token对应的key
  *                 secret:Date.now(),           //加密信息
  *                 expiresIn:60*60*24,          //过期时间,秒
+ *                 refresh:true,                 //是否自动刷新token
  *                 cookie:true,                 //是否使用cookie校验，自动注入，自动刷新，自动校验
  *                 auth:true                    //默认需要校验
  *                 message:'Authentication Error',  //错误提示语
@@ -44,16 +63,18 @@ function setToken(ctx,data,option){
  *              }
  */
 export default function(option){
-  const stateKey = 'user'   //储存用户信息的键值，在ctx.state[stateKey]
   option = Object.assign({},defOption,option)
+  const userKey = 'user'   //储存用户信息的键值，在ctx.state[userKey]
+  const tokenKey = option.key  //储存token的键值，在ctx.state[tokenKey]
   // 1  middleware - koa-jwt
   const middlewareJwt = koaJwt({
-    getToken:(ctx,opts)=>{
+    getToken(ctx,opts){
       return ctx.request.body?ctx.request.body[opts.key]:null
     },
-    cookie:option.cookie?option.key:false,
+    tokenKey,
+    cookie:option.cookie?tokenKey:false,
     secret:option.secret,
-    key:stateKey,
+    key:userKey,
     passthrough: true,
     debug:true
   })
@@ -68,18 +89,22 @@ export default function(option){
         ctx.body = option.message
       }
     }else{
+      let token = ctx.state[tokenKey]
+      let userData = getUserInToken(ctx,userKey)
+      // 校验通过，更新token
+      if(userData && option.refresh){
+        token = setToken(ctx,userData,option)
+      }
+      // 注入auth对象
       ctx.auth = {
         // 当前token
-        token:null,
+        token,
         get user(){
-          const data = ctx.state[stateKey]
-          const user = data?.d
-          // refresh
-          this.token = setToken(ctx,user,option)
-          return user
+          return userData
         },
+        // 设置user同时会自动更新token
         set user(data){
-          ctx.state[stateKey] = data
+          userData = data
           this.token = setToken(ctx,data,option)
         }
       }
@@ -87,13 +112,4 @@ export default function(option){
     }
   }
   return [middlewareJwt,middlewareDefault]
-}
-
-/**
- * 登陆成功后增加
- *
- * @param {*} userInfo
- */
-function authSign(userInfo){
-
 }

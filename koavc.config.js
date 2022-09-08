@@ -26,7 +26,7 @@ export default {
   // ===view渲染配置  
   view:{
     src:'src',        //默认模板地址，相对于根目录
-    engine:'vue'      //渲染引擎 default | lodash | vue 可自行拓展
+    engine:'lodash'      //渲染引擎 default | lodash | vue 可自行拓展
   },
   statics:[["/assets",'./assets']],
   middlewares:[koaBody()],
