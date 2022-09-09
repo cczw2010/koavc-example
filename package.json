@@ -10,6 +10,7 @@
     "jsonwebtoken": "^8.5.1",
     "koa-body": "^5.0.0",
     "koa-jwt": "^4.0.3",
+    "koa-router": "^12.0.0",
     "koavc": "file:../koavc",
     "level": "^8.0.0",
     "mkdirp": "^1.0.4"

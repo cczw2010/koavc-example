@@ -80,7 +80,7 @@ export default function(option){
   })
   // 2 middleware - auth
   const middlewareDefault = (ctx,next)=>{
-    const needAuth = ctx.getControllerExtParam("auth")??option.auth
+    const needAuth = ctx.getRouteExtParam("auth")??option.auth
     if(needAuth &&  ctx.state.jwtOriginalError){
       if(option.redirect){
         ctx.redirect(option.redirect)

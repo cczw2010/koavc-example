@@ -15,11 +15,14 @@ export default {
   //   key: fs.readFileSync('ssl/xxxxyun.com.key'),
   //   cert: fs.readFileSync('ssl/xxxxyun.com.pem'),
   // },
-  // router:[{
-  //   middlewares:[
-  //     ['~/middlewares/auth.js',{secret:'yyds',auth:false,debug:true}],
-  //   ]
-  // }],
+  // ========== 应用配置
+  app:[{
+    dir:'app',
+    // prefix:"/app",
+    middlewares:[
+      ['~/middlewares/auth.js',{secret:'yyds',auth:false,debug:true}],
+    ]
+  }],
   // ===view渲染配置  
   view:{
     src:'src',        //默认模板地址，相对于根目录
