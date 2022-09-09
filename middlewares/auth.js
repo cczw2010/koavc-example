@@ -43,7 +43,7 @@ function getUserInToken(ctx,userKey){
   return data?.data
 }
 /**
- * jwt auth 校验中间件
+ * jwt auth 校验中间件，依赖koa-jwt, 本中间件内自动引入，外部无需配置（koavc ^1.3.4）
  *  ctx.auth.user      //设置user数据会自动更新token，cookie之外的校验方式需要自行更新token
  *  ctx.auth.token
  * 1 controller 中注入[auth]属性，可以自定义是否需要校验auth
