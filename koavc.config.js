@@ -17,10 +17,16 @@ export default {
   // },
   // ========== 应用配置
   app:[{
-    dir:'app',
-    // prefix:"/app",
+    dir:'./app',
+    prefix:"",
     middlewares:[
       ['~/middlewares/auth.js',{secret:'yyds',auth:false,debug:true}],
+    ]
+  },{
+    dir:'./app/auth',
+    prefix:"/auths",
+    middlewares:[
+      ['~/middlewares/auth.js',{secret:'aabbcc',auth:false,debug:true}],
     ]
   }],
   // ===view渲染配置  
