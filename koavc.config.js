@@ -24,7 +24,7 @@ export default {
     ]
   },{
     dir:'./app/auth',
-    prefix:"/auths",
+    prefix:"/auth",
     middlewares:[
       ['~/middlewares/auth.js',{secret:'aabbcc',auth:false,debug:true}],
     ]
