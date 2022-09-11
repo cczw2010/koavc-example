@@ -7,6 +7,7 @@ const defOption = {
                   auth:true,
                   refresh:false, //是否自动刷新token
                   cookie:true,
+                  post:false,
                   expiresIn:60*60*24,
                   message:'Authentication Error',
                   redirect: false       
@@ -55,8 +56,9 @@ function getUserInToken(ctx,userKey){
  *                 key:'authtoken',             //校验的post中或者cookie中的token对应的key
  *                 secret:Date.now(),           //加密信息
  *                 expiresIn:60*60*24,          //过期时间,秒
- *                 refresh:true,                 //是否自动刷新token
+ *                 refresh:true,                //是否自动刷新token
  *                 cookie:true,                 //是否使用cookie校验，自动注入，自动刷新，自动校验
+ *                 post:false,                  //设置的话将自动校验post中对应的键值为token，true的话表示键值和[key]相同
  *                 auth:true                    //默认需要校验
  *                 message:'Authentication Error',  //错误提示语
  *                 redirect: false              //错误跳转地址
@@ -67,10 +69,15 @@ export default function(option){
   const userKey = 'user'   //储存用户信息的键值，在ctx.state[userKey]
   const tokenKey = option.key  //储存token的键值，在ctx.state[tokenKey]
   // 1  middleware - koa-jwt
+  let getToken = null
+  if(option.post){
+    const key = option.post===true?option.key:option.post
+    getToken = function(ctx,opts){
+      return ctx.request.body?ctx.request.body[key]:null
+    }
+  }
   const middlewareJwt = koaJwt({
-    getToken(ctx,opts){
-      return ctx.request.body?ctx.request.body[opts.key]:null
-    },
+    getToken,
     tokenKey,
     cookie:option.cookie?tokenKey:false,
     secret:option.secret,
