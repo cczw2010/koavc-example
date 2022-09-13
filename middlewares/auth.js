@@ -92,7 +92,7 @@ export default function(option){
       if(option.redirect){
         ctx.redirect(option.redirect)
       }else{
-        ctx.state = 401
+        ctx.status = 401
         ctx.body = option.message
       }
     }else{
