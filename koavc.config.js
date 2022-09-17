@@ -32,7 +32,7 @@ export default {
   // ===view渲染配置  
   view:{
     src:'src',        //默认模板地址，相对于根目录
-    engine:'lodash'      //渲染引擎 default | lodash | vue 可自行拓展
+    engine:'vue'      //渲染引擎 default | lodash | vue 可自行拓展
   },
   statics:[["/assets",'./assets']],
   middlewares:[koaBody()],
@@ -48,13 +48,6 @@ export default {
     source_component: "src/components",
     // 需要参与编译渲染的第三方的module配置
     buildModules:{
-      'vuetify':{
-        // 自定义meta 引入相关 css 和 js资源
-        // meta:{},
-        option:{
-          theme: { dark: true },
-        }
-      }
     },
     // vue-meta设置
     vuemeta:{
