@@ -1,11 +1,12 @@
 {
   "name": "demo",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "An example for koavc",
   "type": "module",
   "author": "awen",
   "dependencies": {
     "axios": "^0.27.2",
+    "element-ui": "^2.15.10",
     "formidable": "^2.0.1",
     "jsonwebtoken": "^8.5.1",
     "koa-body": "^5.0.0",

@@ -1,38 +1,50 @@
-<style scoped>
-  .home{
-    color:brown
+<style >
+  body{
+    /* background:wheat */
   }
 </style>
 <template>
-  <v-row justify="center">
-    <!-- <v-date-picker v-model="dates"  multiple ></v-date-picker> -->
-    <ComponentA title="conter"></ComponentA>
-  </v-row>
+ <el-table
+    :data="tableData"
+    style="width: 100%">
+    <el-table-column
+      prop="date"
+      label="日期"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="地址">
+    </el-table-column>
+  </el-table>
 </template>
 <script type="text/javascript">
   export default {
-    asyncData(data){
-      return {
-        title : `${data.title||'asyncData home inject title'}`
+    data() {
+        return {
+          tableData: [{
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄'
+          }, {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
+          }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }]
+        }
       }
-    },
-    head(){
-      return {
-        title:this.title,
-        style: [
-          { cssText: '.headhome { color: red }', type: 'text/css' }
-        ]
-      }
-    },
-    layout:'default',
-    data(){
-      return {
-        title:"home title",
-        dates: ['2021-09-15', '2021-09-20'],
-      }
-    },
-    methods:{
-     
-    }
   }
 </script>

@@ -1,25 +1,40 @@
 <style scoped>
-  .app-layout{
-    margin:0;padding:0;
-    background:#ccc
+  .el-header, .el-footer {
+    background-color: #B3C0D1;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+  }
+  
+  .el-aside {
+    background-color: #D3DCE6;
+    color: #333;
+    text-align: center;
+    line-height: 200px;
+  }
+  
+  .el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    text-align: center;
+    line-height: 160px;
+  }
+  
+  body > .el-container {
+    margin-bottom: 40px;
   }
 </style>
 <template>
-  <v-app class="app-layout">
-    <v-app-bar app dense
-      color="deep-purple accent-4"  >
-      <v-app-bar-nav-icon>
-        <v-img height="48" width="48" src="/assets/image/dog.jpg"></v-img>
-      </v-app-bar-nav-icon>
-      <v-toolbar-title>{{title}}</v-toolbar-title>
-    </v-app-bar>
-    <v-main>
-      <v-container fluid>
-        <custom-page ref="page"/>
-      </v-container>
-    </v-main>
-    <v-footer app></v-footer>
-  </v-app>
+<el-container>
+  <el-aside width="200px">Aside</el-aside>
+  <el-container>
+    <el-header>Header</el-header>
+    <el-main>
+      <custom-page></custom-page>
+    </el-main>
+    <el-footer>Footer</el-footer>
+  </el-container>
+</el-container>
 </template>
 <script>
 
@@ -30,12 +45,6 @@ export default {
         {charset: 'utf-8'},
         {name: 'viewport', content: 'width=device-width, initial-scale=1' },
         {name: 'keywords', content: 'test' }
-      ],
-      // link: [
-      //   { rel: 'favicon', href: 'favicon.ico' }
-      // ],
-      script: [
-        { src: 'https://cdn.jsdelivr.net/npm/vue@2.6.14' },
       ],
   },
   asyncData(data){
@@ -48,10 +57,5 @@ export default {
       title:'layout title'
     }
   },
-  methods:{
-    onClick(){
-      console.log('onClick title')
-    }
-  }
 }
 </script>
