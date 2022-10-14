@@ -1,3 +1,9 @@
+<style>
+html,body{
+  margin:0;
+  padding:0;
+}
+</style>
 <style scoped>
   .el-header, .el-footer {
     background-color: #B3C0D1;
