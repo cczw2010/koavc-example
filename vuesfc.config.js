@@ -1,5 +1,5 @@
 export default {
-  injectPath:'/vstatic',
+  injectUrl:'/vstatic',
   source_page:"src/pages",
   // layout源码目录
   source_layout: "src/layouts",
